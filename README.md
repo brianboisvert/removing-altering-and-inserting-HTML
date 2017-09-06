@@ -1,103 +1,86 @@
-Creating and Inserting DOM Nodes
+Removing, Altering, and Inserting HTML
 ---
 
 ## Objectives
 
 By the end of this lesson, you'll be able to
 
-1. Create DOM elements programmatically
-2. Insert elements into the DOM
-3. Remove elements from the DOM
+1. Removing elements from the DOM
+2. Alter DOM elements programmatically
+3. Insert elements into the DOM
 
-## `document.createElement()`
 
-Creating an element in JavaScript couldn't be easier. Simply call `document.createElement(tagName)`, where `tagName` is the string representation of any valid HTML tag (e.g., `'p'`, `'div'`, `'span'`, etc.).
+## Removing Elements from the DOM
 
-Open this lesson's `index.html` file in your browser and open up the browser's console. In the console, enter
+So now that we have spent some time seeing how we can select elements.  This is important because once we select the elements we then can manipulate the selected elements.  Let's get started with removing some elements.
 
-``` javascript
-var element = document.createElement('div')
+For this readme, you can code along by opening the `index.html` file.
+
+So if we want to remove the `h1` from the DOM, we first need to select the proper element and then we can remove it.  So let's open up the `index.html` in a web browser, open up a console, and type the following:
+
+```js
+  document.querySelector('h1')
+  // <h1> Ada LoveLace </h1>
+
+  document.querySelector('h1').remove()
 ```
 
-Type `element.` (or whatever you named your newly minted element), and explore the properties available. It's a living, breathing DOM element, but it doesn't yet appear in the DOM.
+In the first line, we just concentrate on selecting the correct element.  Once we saw that we got that far, we chain on the JavaScript method `remove` to remove the element.  
 
-We can set properties on it:
+### Altering Elements
+
+One problem with removing elements, is that we may want the element to reappear without re-rendering the page.  So instead of actually removing the element from the Document Object Model, we can simply set the element to hidden, and then change the element back to being visible for the element to re-appear.  This way, we never lose the element, we just change whether or not the user can see the element.  
+
+Let's get showing and hiding our `h1`.  First refresh the `index.html` page so that we reload our HTML.  Ok, now we once again, select the element, and then let's call the `style` method.
+
+
+```js
+  document.querySelector('h1').style
+  // CSSStyleDeclaration {alignContent: "", alignItems: "", alignSelf: "", alignmentBaseline: "", all: "", …}
+  document.querySelector('h1').style.constructor
+  // ƒ CSSStyleDeclaration() { [native code] }
+
+  // We call the constructor method to better understand type of object is returned
+```
+
+As you can see, when we select a DOM element we then can access all of the styles associated with that element by calling the `style` method.  If you're coding along you can see that there are a lot of style attributes associated with each element.  But beyond viewing these attributes we can also alter them.  Let's try the following to method calls.
+
+```js
+  document.querySelector('h1').style.visibility = 'hidden'
+  // our element disappears!
+
+  document.querySelector('h1').style.visibility = 'visible'
+  // our element comes back!
+```
+
+Now we are getting somewhere.  Many of the JavaScript features you see in a website involve simple hiding and displaying of elements.  And as you may have guessed, we can change not just visibility but any attribute of our element.  Let's see that:
 
 ``` javascript
-element.innerHTML = 'Hello, DOM!'
-element.style.backgroundColor = '#f9f9f9';
+let ada = document.querySelector('h1')
+ada.style.backgroundColor = '#f9f9f9';
+ada.innerHTML = 'Hello, DOM!'
 ```
 
 Feel free to set as many properties as you'd like — this is a good chance to look around and explore different properties of DOM elements!
 
-But notice that no matter what properties we add, the element doesn't show up on the page. What gives?
+## Adding new HTML
 
-## `appendChild()`
+Now that we have seen how to alter and remove existing elements, we can also add elements from scratch.  The easiest way to do this is with the `insertAdjacentHTML` method.  This method takes two arguments: the position of the new element, and what that new element is.  Let's insert an element directly after our the our `h1`.
 
-To get an element to appear in the DOM, we have to append it to an existing DOM node. We can start as high up on the tree as `document.body`, or we can find a more specific element using any of the techniques we've learned for traversing the DOM. Let's append `element` to `body` to start:
-
-``` javascript
-document.body.appendChild(element)
+```js
+let ada = document.querySelector('h1')
+ada.insertAdjacentHTML('afterend', '<li> Nice words</li>')
 ```
 
-If you've been following along, you should see `"Hello, DOM!"` on the page now (and it should have a light gray background).
+You can see that with the above code we first selected our `h1` and then after the element appended a new `li` DOM element.  With a quick glance at the documentation you can see all of the other ways that you can add elements to your html document.
 
-We can continue to update `element`, since we have a reference to it:
+### Summary
 
-``` javascript
-element.style.textAlign = 'center';
-```
-
-And now our element's text is centered.
-
-We can append elements to that element:
-
-
-``` javascript
-var ul = document.createElement('ul')
-
-for (let i = 0; i < 3; i++) {
-  let li = document.createElement('li')
-  li.innerHTML = (i + 1).toString()
-  ul.appendChild(li)
-}
-
-element.appendChild(ul)
-```
-
-Hm, that looks a bit ugly. Let's fix it
-
-``` javascript
-ul.style.textAlign = 'left'
-```
-
-That's better.
-
-## `removeChild()`
-
-Now let's remove one of those `li`s.
-
-``` javascript
-ul.removeChild(ul.querySelector('li:nth-child(2)'))
-```
-
-Boom. Second element is gone.
-
-What if we want to remove the whole unordered list (`ul`)?
-
-## `element.remove()`
-
-We can just call `remove()` on the element itself:
-
-``` javascript
-ul.remove()
-```
-
-And it's gone!
+In this lesson, we went beyond selecting pieces of our HTML to altering our HTML as well.  In each of the sections, we first select a target element and then use that element to change our HTML.  We saw that we can remove a target element with the `remove` method, alter properties of the target by setting attributes of the target, or add in a new element using the `insertAdjacentHTML` method.
 
 ## Resources
 
-- [document.createElement()](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement)
-- [appendChild()](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild)
+- [remove()](https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove)
+- [insertAdjacentHTML()](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML)
 
-<p class='util--hide'>View <a href='https://learn.co/lessons/creating-and-inserting-dom-nodes'>Creating And Inserting Nodes</a> on Learn.co and start learning to code for free.</p>
+<p class='util--hide'>View <a href='https://learn.co/lessons/removing-altering-and-inserting-HTML'>Removing, Altering, and Inserting HTML</a> on Learn.co and start learning to code for free.</p>

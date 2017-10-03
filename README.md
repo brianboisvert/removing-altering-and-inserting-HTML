@@ -1,22 +1,21 @@
 Removing, Altering, and Inserting HTML
 ---
 
-## Objectives
+### Objectives
 
 By the end of this lesson, you'll be able to
 
-1. Removing elements from the DOM
+1. Remove elements from the DOM
 2. Alter DOM elements programmatically
 3. Insert elements into the DOM
 
+### Removing Elements from the DOM
 
-## Removing Elements from the DOM
-
-So now that we have spent some time seeing how we can select elements.  This is important because once we select the elements we then can manipulate the selected elements.  Let's get started with removing some elements.
+So now we have spent some time seeing how we can select elements.  This is important because once we select the elements we then can manipulate the selected elements.  Let's get started with removing some elements.
 
 For this readme, you can code along by opening the `index.html` file.
 
-So if we want to remove the `h1` from the DOM, we first need to select the proper element and then we can remove it.  So let's open up the `index.html` in a web browser, open up a console, and type the following:
+So if we want to remove the `h1` from the DOM, we first need to select the proper element and then we can remove it.  So let's open up the `index.html` in a web browser, open up a console in the browser, and type the following:
 
 ```js
   document.querySelector('h1')
@@ -25,7 +24,7 @@ So if we want to remove the `h1` from the DOM, we first need to select the prope
   document.querySelector('h1').remove()
 ```
 
-In the first line, we just concentrate on selecting the correct element.  Once we saw that we got that far, we chain on the JavaScript method `remove` to remove the element.  
+In the first line, we simply select the correct element.  Once we got that far, we chain on the JavaScript method `remove` to remove the element.  
 
 ### Altering Elements
 
@@ -40,10 +39,10 @@ Let's get showing and hiding our `h1`.  First refresh the `index.html` page so t
   document.querySelector('h1').style.constructor
   // ƒ CSSStyleDeclaration() { [native code] }
 
-  // We call the constructor method to better understand type of object is returned
+  // We call the constructor method to better understand type of object is returned.  Here the constructor is named CSSStyleDeclaration.
 ```
 
-As you can see, when we select a DOM element we then can access all of the styles associated with that element by calling the `style` method.  If you're coding along you can see that there are a lot of style attributes associated with each element.  But beyond viewing these attributes we can also alter them.  Let's try the following to method calls.
+As you can see, when we select a DOM element we then can access all of the styles associated with that element by calling the `style` property.  If you're coding along, you can see that there are a lot of style attributes associated with each element.  But beyond viewing these attributes we can also alter them.  Let's try the following to method calls.
 
 ```js
   document.querySelector('h1').style.visibility = 'hidden'

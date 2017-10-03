@@ -1,6 +1,10 @@
 tags:
   - javascript
+  - selectors
+  - show
+  - hide
+  - DOM
 languages:
   - javascript
 resources:
-  - 1
+  - 2
